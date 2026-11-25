@@ -1,34 +1,78 @@
-﻿$vault = "D:\ЗООПАРК\ЗООПАРК\ЗООПАРК ДОЛБОЕБОВ\Public"
+﻿
+$vault = "D:\ЗООПАРК\ЗООПАРК\ЗООПАРК ДОЛБОЕБОВ\Public"
 $site  = "D:\quartz-site"
 
-if (-not (Test-Path -LiteralPath $vault)) {
-    Write-Host "ERROR: vault folder not found: $vault" -ForegroundColor Red
+$ErrorActionPreference = "Stop"
+
+try {
+    if (-not (Test-Path -LiteralPath $vault)) {
+        throw "Vault folder not found: $vault"
+    }
+
+    if (-not (Test-Path -LiteralPath $site)) {
+        throw "Quartz folder not found: $site"
+    }
+
+    Set-Location $site
+
+    Write-Host "=== Syncing Obsidian files ===" -ForegroundColor Cyan
+
+    robocopy $vault "$site\content\Public" /MIR /XD .obsidian .trash /R:2 /W:2
+
+    if ($LASTEXITCODE -ge 8) {
+        throw "Robocopy failed with code $LASTEXITCODE"
+    }
+
+    Write-Host "=== Cleaning old Quartz build ===" -ForegroundColor Cyan
+
+    if (Test-Path "$site\public") {
+        Remove-Item "$site\public" -Recurse -Force
+    }
+
+    Write-Host "=== Building Quartz ===" -ForegroundColor Cyan
+
+    npx quartz build
+
+    if ($LASTEXITCODE -ne 0) {
+        throw "Quartz build failed"
+    }
+
+    Write-Host "=== Checking Git ===" -ForegroundColor Cyan
+
+    git add -A
+
+    if ($LASTEXITCODE -ne 0) {
+        throw "Git add failed"
+    }
+
+    git diff --cached --quiet
+
+    if ($LASTEXITCODE -eq 0) {
+        Write-Host "No changes to push." -ForegroundColor Green
+        exit 0
+    }
+
+    Write-Host "=== Committing changes ===" -ForegroundColor Cyan
+
+    git commit -m ("Full site update " + (Get-Date -Format "yyyy-MM-dd HH:mm"))
+
+    if ($LASTEXITCODE -ne 0) {
+        throw "Git commit failed"
+    }
+
+    Write-Host "=== Pushing to GitHub ===" -ForegroundColor Cyan
+
+    git push
+
+    if ($LASTEXITCODE -ne 0) {
+        throw "Git push failed"
+    }
+
+    Write-Host ""
+    Write-Host "SUCCESS! Quartz site fully updated." -ForegroundColor Green
+}
+catch {
+    Write-Host ""
+    Write-Host "ERROR: $_" -ForegroundColor Red
     exit 1
 }
-
-Set-Location $site
-
-Write-Host "=== Copying Public from Obsidian ==="
-robocopy $vault "$site\content\Public" /MIR /XD .obsidian .trash /NFL /NDL /NJH /NP
-if ($LASTEXITCODE -ge 8) {
-    Write-Host "ERROR: copy failed" -ForegroundColor Red
-    exit 1
-}
-
-git add -A
-git diff --cached --quiet
-if ($LASTEXITCODE -eq 0) {
-    Write-Host "No changes, site is up to date."
-    exit 0
-}
-
-Write-Host "=== Pushing to GitHub ==="
-git commit -m ("update " + (Get-Date -Format "yyyy-MM-dd HH:mm"))
-git push
-if ($LASTEXITCODE -ne 0) {
-    Write-Host "ERROR: push failed" -ForegroundColor Red
-    exit 1
-}
-
-Write-Host ""
-Write-Host "Done. The site will update in 1-3 minutes." -ForegroundColor Green
