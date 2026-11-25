@@ -3,10 +3,10 @@
 		{"id":"7a197f0635964164","type":"text","text":"Создатель:\nТГК https://t.me/mrzarlik\nПОЧТА: \nmrzarlika@gmail.com \nМОЙ НОМЕР: +79396091909\nЦЕНЫ НА ДОКСЫ СНОСЫ СЛИВЫ В ЛС!","x":-240,"y":480,"width":400,"height":200},
 		{"id":"dd13241a22aeb6b6","type":"file","file":"Public/РФ/Недо доксеры педофилы/СИНДЯНОВ АРТЕМ ВЛАДИСЛАВОВИЧ/СИНДЯНОВ АРТЕМ ВЛАДИСЛАВОВИЧ.md","x":-240,"y":-27,"width":400,"height":447},
 		{"id":"3467520829d63726","type":"file","file":"Public/РФ/Недо доксеры педофилы/СИНДЯНОВ АРТЕМ ВЛАДИСЛАВОВИЧ/МАТЬ СИНДЯНОВА АРТЕМА ВЛАДИСЛАВОВИЧА.md","x":-800,"y":-27,"width":400,"height":400},
-		{"id":"078f99e9992e6dd8","type":"file","file":"Мусор/Pasted image 20261003152002.png","x":-800,"y":420,"width":400,"height":642},
-		{"id":"34fe1f3f514df4d5","type":"file","file":"Мусор/Pasted image 20261003152030.png","x":-1320,"y":-27,"width":362,"height":400},
-		{"id":"de58f62a776c6060","type":"file","file":"Мусор/Pasted image 20261003152246.png","x":-1320,"y":420,"width":362,"height":366},
-		{"id":"87b3cc7bab27720b","type":"file","file":"Мусор/Pasted image 20261003152743.png","x":320,"y":-27,"width":723,"height":1089}
+		{"id":"078f99e9992e6dd8","type":"file","file":"Public/Мусор/Pasted image 20261003152002.png","x":-800,"y":420,"width":400,"height":642},
+		{"id":"34fe1f3f514df4d5","type":"file","file":"Public/Мусор/Pasted image 20261003152030.png","x":-1320,"y":-27,"width":362,"height":400},
+		{"id":"de58f62a776c6060","type":"file","file":"Public/Мусор/Pasted image 20261003152246.png","x":-1320,"y":420,"width":362,"height":366},
+		{"id":"87b3cc7bab27720b","type":"file","file":"Public/Мусор/Pasted image 20261003152743.png","x":320,"y":-27,"width":723,"height":1089}
 	],
 	"edges":[
 		{"id":"cc48bbf49455838d","fromNode":"7a197f0635964164","fromSide":"top","toNode":"dd13241a22aeb6b6","toSide":"bottom"},
