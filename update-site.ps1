@@ -1,22 +1,28 @@
 ﻿
 $vault = "D:\ЗООПАРК\ЗООПАРК\ЗООПАРК ДОЛБОЕБОВ\Public"
 $site = "D:\quartz-site"
-$target = "$site\content\Public"
+$target = Join-Path $site "content\Public"
 
 $ErrorActionPreference = "Stop"
 
 try {
-    if (-not (Test-Path -LiteralPath $vault)) {
-        throw "Vault not found: $vault"
+    Write-Host "==================================" -ForegroundColor Cyan
+    Write-Host "       QUARTZ FULL UPDATER"
+    Write-Host "==================================" -ForegroundColor Cyan
+
+    # Проверка путей
+    if (-not (Test-Path -LiteralPath $vault -PathType Container)) {
+        throw "Obsidian folder not found: $vault"
     }
 
-    if (-not (Test-Path -LiteralPath $site)) {
-        throw "Quartz site not found: $site"
+    if (-not (Test-Path -LiteralPath $site -PathType Container)) {
+        throw "Quartz folder not found: $site"
     }
 
     Set-Location $site
 
-    Write-Host "=== FULL OBSIDIAN SYNC ===" -ForegroundColor Cyan
+    # Полное удаление старого содержимого
+    Write-Host "`n[1/6] Removing old content..." -ForegroundColor Yellow
 
     if (Test-Path -LiteralPath $target) {
         Remove-Item -LiteralPath $target -Recurse -Force
@@ -24,57 +30,66 @@ try {
 
     New-Item -ItemType Directory -Path $target -Force | Out-Null
 
-    robocopy $vault $target /E /XD .obsidian .trash /R:2 /W:2
+    # Полное копирование из Obsidian
+    Write-Host "`n[2/6] Copying fresh Obsidian content..." -ForegroundColor Cyan
 
-    if ($LASTEXITCODE -ge 8) {
-        throw "Robocopy failed: $LASTEXITCODE"
-    }
+    Get-ChildItem -LiteralPath $vault -Force |
+        Where-Object {
+            $_.Name -notin @(".obsidian", ".trash")
+        } |
+        ForEach-Object {
+            Copy-Item -LiteralPath $_.FullName `
+                -Destination $target `
+                -Recurse -Force
+        }
 
-    Write-Host "=== CREATING FOLDER PAGES ===" -ForegroundColor Cyan
+    # Проверка структуры
+    Write-Host "`n[3/6] Checking folders..." -ForegroundColor Cyan
 
-    $folders = @(Get-ChildItem -LiteralPath $target -Directory -Recurse)
+    $folders = @(
+        Get-ChildItem -LiteralPath $target -Directory -Recurse
+    )
 
     foreach ($folder in $folders) {
         $index = Join-Path $folder.FullName "index.md"
 
         if (-not (Test-Path -LiteralPath $index)) {
-            $relative = $folder.FullName.Substring($target.Length).TrimStart('\')
-            $depth = ($relative -split '\\').Count
-            $links = @()
+            $title = $folder.Name
 
-            Get-ChildItem -LiteralPath $folder.FullName -Directory |
-                Sort-Object Name |
-                ForEach-Object {
-                    $links += "- [[Public/$relative/$($_.Name)/index|$($_.Name)]]"
-                }
+            $content = @"
+---
+title: "$title"
+---
 
-            $content = @(
-                "# $($folder.Name)"
-                ""
-                "## Вложенные папки"
-                ""
-                $links
-            )
+# $title
+"@
 
-            Set-Content -LiteralPath $index -Value $content -Encoding UTF8
+            Set-Content -LiteralPath $index `
+                -Value $content `
+                -Encoding UTF8
         }
     }
 
-    Write-Host "=== CLEANING OLD BUILD ===" -ForegroundColor Cyan
+    Write-Host "Folders found: $($folders.Count)" -ForegroundColor Green
+
+    # Удаление старой сборки
+    Write-Host "`n[4/6] Cleaning old Quartz build..." -ForegroundColor Cyan
 
     if (Test-Path "$site\public") {
         Remove-Item "$site\public" -Recurse -Force
     }
 
-    Write-Host "=== BUILDING QUARTZ ===" -ForegroundColor Cyan
+    # Сборка
+    Write-Host "`nBuilding Quartz..." -ForegroundColor Cyan
 
     npx quartz build
 
     if ($LASTEXITCODE -ne 0) {
-        throw "Quartz build failed"
+        throw "Quartz build failed with exit code $LASTEXITCODE"
     }
 
-    Write-Host "=== GIT UPDATE ===" -ForegroundColor Cyan
+    # Git
+    Write-Host "`n[5/6] Preparing Git..." -ForegroundColor Cyan
 
     git add -A
 
@@ -89,11 +104,14 @@ try {
         exit 0
     }
 
-    git commit -m ("Full site update " + (Get-Date -Format "yyyy-MM-dd HH:mm"))
+    git commit -m ("Full Quartz update " + (Get-Date -Format "yyyy-MM-dd HH:mm"))
 
     if ($LASTEXITCODE -ne 0) {
         throw "Git commit failed"
     }
+
+    # Отправка
+    Write-Host "`n[6/6] Pushing to GitHub..." -ForegroundColor Cyan
 
     git push
 
@@ -101,11 +119,14 @@ try {
         throw "Git push failed"
     }
 
-    Write-Host ""
-    Write-Host "FULL UPDATE COMPLETED!" -ForegroundColor Green
+    Write-Host "`n==================================" -ForegroundColor Green
+    Write-Host "       UPDATE COMPLETED!"
+    Write-Host "==================================" -ForegroundColor Green
+
+    Write-Host "Your Quartz site will update after GitHub Actions finishes."
+
 }
 catch {
-    Write-Host ""
-    Write-Host "ERROR: $_" -ForegroundColor Red
+    Write-Host "`nERROR: $_" -ForegroundColor Red
     exit 1
 }
