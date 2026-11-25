@@ -1,0 +1,21 @@
+{
+	"nodes":[
+		{"id":"b6b30cd114202612","type":"file","file":"Public/РФ/Москва/Сергиев-Посад/Скоропусковск/Вика Алексеевна/Личные данные матери Вики Алексеевны.md","x":720,"y":-260,"width":400,"height":460},
+		{"id":"1d5cf2afc893fd3f","type":"file","file":"Public/РФ/Москва/Сергиев-Посад/Скоропусковск/Вика Алексеевна/Личные данные отца Вики Алексеевны.md","x":1160,"y":-260,"width":360,"height":460},
+		{"id":"b1a9cf49c3275e51","type":"file","file":"Public/РФ/Москва/Сергиев-Посад/Скоропусковск/Вика Алексеевна/Личные данные Вики Алексеевны.md","x":720,"y":-520,"width":800,"height":175},
+		{"id":"eab91a24f9f0e21d","type":"file","file":"Public/РФ/Москва/Сергиев-Посад/Скоропусковск/Вика Алексеевна/Соц-сети Вики Алексеевны.md","x":280,"y":-520,"width":360,"height":720},
+		{"id":"7617436e7b0e7fa0","type":"file","file":"Public/РФ/Москва/Сергиев-Посад/Скоропусковск/Вика Алексеевна/Фотки Вики, видео/Pasted image 20261125131012.png","x":-480,"y":-520,"width":720,"height":720},
+		{"id":"e53801c56b3f36ae","type":"file","file":"Public/РФ/Москва/Сергиев-Посад/Скоропусковск/Вика Алексеевна/Фотки Вики, видео/Pasted image 20261125131034.png","x":-480,"y":280,"width":720,"height":386},
+		{"id":"bef2eba3b69dc5b3","type":"file","file":"Public/РФ/Москва/Сергиев-Посад/Скоропусковск/Вика Алексеевна/Фотки Вики, видео/22221)(2).mp4","x":-480,"y":-1400,"width":1320,"height":821},
+		{"id":"7b28d1b73d423aec","x":1160,"y":-1403,"width":360,"height":824,"type":"file","file":"Pasted image 20261125131149.png"}
+	],
+	"edges":[
+		{"id":"0ad98c6612423151","fromNode":"b1a9cf49c3275e51","fromSide":"bottom","toNode":"b6b30cd114202612","toSide":"top"},
+		{"id":"c2bd8f242d6742ed","fromNode":"b1a9cf49c3275e51","fromSide":"bottom","toNode":"1d5cf2afc893fd3f","toSide":"top"},
+		{"id":"3cfa5f7b40e2024d","fromNode":"b1a9cf49c3275e51","fromSide":"left","toNode":"eab91a24f9f0e21d","toSide":"right"},
+		{"id":"ce52152d012846c4","fromNode":"b1a9cf49c3275e51","fromSide":"top","toNode":"bef2eba3b69dc5b3","toSide":"right"},
+		{"id":"02c684e660d5538a","fromNode":"b1a9cf49c3275e51","fromSide":"top","toNode":"7b28d1b73d423aec","toSide":"left"},
+		{"id":"386fbd4e91d1db1b","fromNode":"7617436e7b0e7fa0","fromSide":"bottom","toNode":"e53801c56b3f36ae","toSide":"top"},
+		{"id":"79efd99273ce0961","fromNode":"bef2eba3b69dc5b3","fromSide":"bottom","toNode":"7617436e7b0e7fa0","toSide":"top"}
+	]
+}
