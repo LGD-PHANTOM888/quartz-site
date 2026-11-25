@@ -1,0 +1,25 @@
+{
+	"nodes":[
+		{"id":"dc44e492c3a0e3a0","type":"file","file":"Public/УКР/Чернигов/Личные данные Евгения.md","x":-133,"y":-70,"width":400,"height":590},
+		{"id":"3786c2ff6f8e5186","type":"file","file":"Public/УКР/Чернигов/Аккаунты Евгения.md","x":-600,"y":-70,"width":400,"height":400},
+		{"id":"f934ada9eb8cafb9","type":"file","file":"Public/УКР/Чернигов/Фоточки Евгения/Pasted image 20261125120100.png","x":-600,"y":400,"width":400,"height":447},
+		{"id":"1784928d1fd11f09","type":"file","file":"Public/УКР/Чернигов/Фоточки Евгения/Pasted image 20261125120248.png","x":-600,"y":1401,"width":400,"height":360},
+		{"id":"ae3b575b4417bfbe","type":"file","file":"Public/УКР/Чернигов/Фоточки Евгения/Pasted image 20261125120142.png","x":-133,"y":560,"width":400,"height":484},
+		{"id":"890dd74892fade49","type":"file","file":"Public/УКР/Чернигов/Фоточки Евгения/Pasted image 20261125120340.png","x":-1080,"y":400,"width":403,"height":447},
+		{"id":"ccead902072b1b2a","type":"file","file":"Public/УКР/Чернигов/Фоточки Евгения/Pasted image 20261125120414.png","x":-1080,"y":-70,"width":438,"height":400},
+		{"id":"28ae77129d1facf2","type":"file","file":"Public/УКР/Чернигов/Фоточки Евгения/Pasted image 20261125120123.png","x":-600,"y":892,"width":400,"height":451},
+		{"id":"0b66d4599d757076","type":"file","file":"Public/УКР/Чернигов/Фоточки Евгения/Pasted image 20261125120235.png","x":-133,"y":1302,"width":400,"height":459},
+		{"id":"cc05f9c8c26d5caa","type":"file","file":"Public/УКР/Чернигов/Фоточки Евгения/Pasted image 20261125120325.png","x":320,"y":1302,"width":416,"height":459}
+	],
+	"edges":[
+		{"id":"3c5f1c29ac6c6d6c","fromNode":"dc44e492c3a0e3a0","fromSide":"left","toNode":"3786c2ff6f8e5186","toSide":"right"},
+		{"id":"a7fe8321f5c1faa7","fromNode":"dc44e492c3a0e3a0","fromSide":"left","toNode":"f934ada9eb8cafb9","toSide":"right"},
+		{"id":"ecd362dc95f39170","fromNode":"dc44e492c3a0e3a0","fromSide":"left","toNode":"28ae77129d1facf2","toSide":"right"},
+		{"id":"93d591d09da11292","fromNode":"dc44e492c3a0e3a0","fromSide":"left","toNode":"1784928d1fd11f09","toSide":"right"},
+		{"id":"53854a908b6414eb","fromNode":"28ae77129d1facf2","fromSide":"right","toNode":"0b66d4599d757076","toSide":"left"},
+		{"id":"bb9f5e6f463c8918","fromNode":"f934ada9eb8cafb9","fromSide":"right","toNode":"ae3b575b4417bfbe","toSide":"left"},
+		{"id":"e7dd43950b22f4d3","fromNode":"f934ada9eb8cafb9","fromSide":"left","toNode":"890dd74892fade49","toSide":"right"},
+		{"id":"d46ba3bb3d5d180e","fromNode":"0b66d4599d757076","fromSide":"right","toNode":"cc05f9c8c26d5caa","toSide":"left"},
+		{"id":"0c8de77a1cb96c68","fromNode":"3786c2ff6f8e5186","fromSide":"left","toNode":"ccead902072b1b2a","toSide":"right"}
+	]
+}
